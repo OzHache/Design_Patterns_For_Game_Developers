@@ -1,27 +1,32 @@
-﻿using UnityEngine;
-
-/// <summary>
-/// Concrete Product from the Factory
-/// </summary>
-public class BlueBall: MonoBehaviour, IBall
+﻿using System;
+using UnityEngine;
+[Serializable]
+public class BallBehaviour : MonoBehaviour, IBall
 {
+    [SerializeField] private Vector3 m_launchDirection;
+    [SerializeField] private float m_speed;
+
+    private Vector3 m_velocity
+    {
+        get {return m_launchDirection.normalized * m_speed;}
+    }
+
     //Launches the ball and makes sure the gameObject is active
     public void Activate()
     {
-        Vector3 velocity = transform.up * 10.0f;
         gameObject.SetActive(true);
+
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
             rb = gameObject.AddComponent<Rigidbody>();
         }
-        rb.velocity = velocity;
+
+        rb.velocity = m_velocity;
     }
 
-    //Unused the the Abstract Factory 
     public void Deactivate()
     {
         gameObject.SetActive(false);
-
     }
 }

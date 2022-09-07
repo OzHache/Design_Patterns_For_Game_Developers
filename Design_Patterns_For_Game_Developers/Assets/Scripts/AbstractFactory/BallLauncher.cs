@@ -2,33 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//------------------------------------------------------------------------------
 //Abstract Factory Client
-//Utilizes the Interface on the AbstractFactory to generate the product(Red and Blue Balls)
+//Utilizes the Interface on the AbstractFactory(IBall Factory) to generate the
+//products (IBall) Red and Blue Balls
+//------------------------------------------------------------------------------
+
 public class BallLauncher : MonoBehaviour
 {
-    //Interface
+    //Abstract Factory Interface Reference
     private IBallFactory m_ballFactory;
 
+    //Gather references
     private void Start()
     {
         m_ballFactory = GetComponent<IBallFactory>();
     }
 
-    private void OnLaunchRedBall() {
+    /// <summary>
+    /// Called from Input Action Pressing Key Q, asks for a ball to be created.
+    /// Then activates the ball.
+    /// </summary>
+    private void OnLaunchRedBall()
+    {
         // Create the ball
         IBall ballA = m_ballFactory.CreateBallA(transform);
-        // Escape if the ball failed to be created
-        if (ballA == null) return;
+
         // Activate the ball
-        ballA.Activate();
+        ballA?.Activate();
 
     }
-    private void OnLaunchBlueBall() {
+
+    /// <summary>
+    /// Called from Input Action Pressing Key E, asks for a ball to be created.
+    /// Then activates the ball.
+    /// </summary>
+    private void OnLaunchBlueBall()
+    {
         // Create the ball
         IBall ballB = m_ballFactory.CreateBallB(transform);
-        // Escape if the ball failed to be created
-        if (ballB == null) return;
-        // Activate the ball
-        ballB.Activate();
+        
+        //Activate
+        ballB?.Activate();
     }
 }

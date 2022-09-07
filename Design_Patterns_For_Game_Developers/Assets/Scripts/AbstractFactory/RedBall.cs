@@ -3,8 +3,9 @@
 /// <summary>
 /// Concrete Product from the Factory
 /// </summary>
-internal class RedBall : MonoBehaviour, IBall
+public class RedBall : MonoBehaviour, IBall
 {
+    //Launches the ball and makes sure the gameObject is active
     public void Activate()
     {
         Vector3 velocity = transform.forward * 10.0f;
@@ -17,9 +18,9 @@ internal class RedBall : MonoBehaviour, IBall
         rb.velocity = velocity;
     }
 
+    //Unused the the Abstract Factory
     public void Deactivate()
     {
         gameObject.SetActive(false);
-        
     }
 }
